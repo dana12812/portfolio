@@ -7,7 +7,14 @@ const I = {
   journey: <><circle cx="6" cy="18" r="2.5" /><circle cx="18" cy="6" r="2.5" /><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5" /></>,
   certs: <><circle cx="12" cy="9" r="6" /><path d="m8.5 14-1.5 7 5-2.5 5 2.5-1.5-7" /></>,
   contact: <><rect x="3" y="5" width="18" height="14" rx="2.5" /><path d="m4 7 8 6 8-6" /></>,
+  code: <><path d="m8 7-5 5 5 5" /><path d="m16 7 5 5-5 5" /><path d="m13.5 4-3 16" /></>,
+  case: <><rect x="3" y="7" width="18" height="13" rx="2.5" /><path d="M9 7V5.5A1.5 1.5 0 0 1 10.5 4h3A1.5 1.5 0 0 1 15 5.5V7" /><path d="M3 12.5h18" /></>,
 }
+
+const EXT = [
+  ['https://github.com/dana12812', 'GitHub', 'code'],
+  ['https://www.linkedin.com/in/danaalsaleh128', 'LinkedIn', 'case'],
+]
 
 const TABS = [
   ['top', 'Home', 'home'],
@@ -15,14 +22,14 @@ const TABS = [
   ['desk', 'About', 'about'],
   ['journey', 'Journey', 'journey'],
   ['certs', 'Certs', 'certs'],
-  ['contact', 'Contact', 'contact'],
 ]
+const SPY = [...TABS.map(([id]) => id), 'contact']
 
 export default function TabBar() {
   const [active, setActive] = useState('top')
 
   useEffect(() => {
-    const els = TABS.map(([id]) => document.getElementById(id)).filter(Boolean)
+    const els = SPY.map((id) => document.getElementById(id)).filter(Boolean)
     const onScroll = () => {
       const line = window.innerHeight * 0.4
       let cur = 'top'
@@ -45,6 +52,13 @@ export default function TabBar() {
         <a key={id} href={`#${id}`} className={active === id ? 'on' : ''} aria-current={active === id ? 'true' : undefined}>
           <svg viewBox="0 0 24 24" aria-hidden="true">{I[icon]}</svg>
           <span>{label}</span>
+        </a>
+      ))}
+      <i className="tab-sep" aria-hidden="true" />
+      {EXT.map(([href, label, icon]) => (
+        <a key={label} href={href} className="ext" target="_blank" rel="noopener noreferrer" aria-label={`${label} profile (opens in a new tab)`}>
+          <svg viewBox="0 0 24 24" aria-hidden="true">{I[icon]}</svg>
+          <span>{label}<b aria-hidden="true">↗</b></span>
         </a>
       ))}
     </nav>

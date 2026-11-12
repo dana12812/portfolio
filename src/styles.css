@@ -1716,3 +1716,42 @@ a:hover > .arrow {
     display: none !important;
   }
 }
+
+/* tab bar: external profile links */
+.tab-sep {
+  width: 1px;
+  align-self: stretch;
+  margin: 8px 4px;
+  background: rgba(42, 20, 24, 0.14);
+}
+.tabbar a.ext {
+  color: var(--accent);
+}
+.tabbar a.ext:hover {
+  background: rgba(123, 30, 44, 0.08);
+}
+.tabbar a.ext b {
+  font-weight: 600;
+  font-size: 0.85em;
+  margin-left: 1px;
+}
+@media (width<=640px) {
+  .tabbar {
+    left: 8px;
+    right: 8px;
+    gap: 0;
+    padding: 4px;
+  }
+  .tabbar a {
+    padding: 8px 0 7px;
+    font-size: 9.5px;
+    letter-spacing: -0.01em;
+  }
+  .tab-sep {
+    margin: 8px 2px;
+  }
+  .tabbar svg {
+    width: 19px;
+    height: 19px;
+  }
+}
