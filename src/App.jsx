@@ -4,6 +4,7 @@ import Badge from './components/Badge.jsx'
 import Tv from './components/Tv.jsx'
 import Desk from './components/Desk.jsx'
 import { Arrow, Spark } from './components/Icons.jsx'
+import TabBar from './components/TabBar.jsx'
 
 const src = (p) => `./${p}`
 
@@ -188,7 +189,6 @@ export default function App() {
               <figcaption>
                 <span className="cert-title">{c.title}</span>
                 <span className="cert-meta"><small>Achieved</small>{c.achieved}</span>
-                <span className="cert-meta"><small>Valid until</small>Nov 10, 2028</span>
               </figcaption>
             </figure>
           ))}
@@ -221,6 +221,8 @@ export default function App() {
           <a href="#top">Back to top ↑</a>
         </footer>
       </section>
+
+      <TabBar />
 
       {zoom && (
         <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${zoom.level} certificate`} onClick={() => setZoom(null)}>
