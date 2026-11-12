@@ -23,7 +23,12 @@ function Calendar() {
     <div className="cal">
       <div className="cal-head">
         <button onClick={() => shift(-1)} aria-label="Previous month">‹</button>
-        <div><strong>{month}</strong> <span>{view.y}</span></div>
+        <div className="cal-title">
+          <strong>{month}</strong> <span>{view.y}</span>
+          {(view.m !== t.m || view.y !== t.y) && (
+            <button className="cal-today" onClick={() => setView({ y: t.y, m: t.m })}>Today</button>
+          )}
+        </div>
         <button onClick={() => shift(1)} aria-label="Next month">›</button>
       </div>
       <div className="cal-grid">

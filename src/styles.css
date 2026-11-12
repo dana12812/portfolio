@@ -1570,3 +1570,75 @@ a:hover > .arrow {
     justify-content: center;
   }
 }
+
+/* desk polish */
+.cal-title {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.cal-today {
+  font-family: var(--mono);
+  font-size: 10px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 999px !important;
+  padding: 3px 8px;
+  margin-left: 4px;
+  color: var(--accent);
+  border: 1px solid currentColor;
+  align-self: center;
+}
+.about-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+@media (width<=640px) {
+  .gadget {
+    padding: 12px;
+    border-radius: 24px;
+  }
+  .gadget-label {
+    padding: 2px 6px 10px;
+  }
+  .cal {
+    padding: 14px 14px 12px;
+  }
+  .cal-head strong {
+    font-size: 22px;
+  }
+  .day {
+    aspect-ratio: auto;
+    height: 34px;
+  }
+  .dow {
+    padding: 2px 0 6px;
+  }
+  .hinge {
+    height: 10px;
+    margin: 0 18px;
+  }
+  .calc {
+    padding: 12px;
+  }
+  .lcd {
+    height: 54px;
+  }
+  .lcd-num {
+    font-size: 26px;
+  }
+  .key {
+    height: 42px;
+  }
+  .facts {
+    grid-template-columns: 1fr;
+  }
+  .about-cta .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}

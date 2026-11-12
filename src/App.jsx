@@ -134,6 +134,11 @@ export default function App() {
             <ul className="facts">
               {facts.map((f) => <li key={f.k}><small>{f.k}</small>{f.v}</li>)}
             </ul>
+            <div className="about-cta">
+              <a className="btn primary" href={links[0].href} target="_blank" rel="noopener noreferrer">GitHub <Arrow /></a>
+              <a className="btn primary" href={links[1].href} target="_blank" rel="noopener noreferrer">LinkedIn <Arrow /></a>
+              <a className="btn" href={`mailto:${me.email}`} target="_blank" rel="noopener noreferrer">Email me <Arrow /></a>
+            </div>
           </div>
           <div className="reveal"><Desk /></div>
         </div>
@@ -179,17 +184,15 @@ export default function App() {
             <figure key={c.level} className="cert reveal">
               <button className="cert-img" onClick={() => setZoom(c)} aria-label={`View ${c.level} certificate full size`}>
                 <img src={src(c.image)} alt={`Fortinet ${c.level} certificate`} loading="lazy" />
-                <span className="tile-ch">{c.level}</span>
               </button>
               <figcaption>
                 <span className="cert-title">{c.title}</span>
                 <span className="cert-meta"><small>Achieved</small>{c.achieved}</span>
-                <span className="cert-meta"><small>Validation no.</small>{c.validation}</span>
+                <span className="cert-meta"><small>Valid until</small>Nov 10, 2028</span>
               </figcaption>
             </figure>
           ))}
         </div>
-        <p className="cert-also reveal"><small>Also</small> IELTS Academic, British Council · Fortinet certificates valid until Nov 2028</p>
       </section>
 
       <section className="contact" id="contact">

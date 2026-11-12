@@ -121,21 +121,18 @@ export const certs = [
     title: 'The threat landscape',
     image: 'certs/nse1.jpg',
     achieved: 'Oct 16, 2026',
-    validation: '5883957310DA',
   },
   {
     level: 'NSE 2',
     title: 'Security solutions',
     image: 'certs/nse2.jpg',
     achieved: 'Nov 10, 2026',
-    validation: '1133720043DA',
   },
   {
     level: 'NSE 3',
     title: 'Fortinet products',
     image: 'certs/nse3.jpg',
     achieved: 'Nov 10, 2026',
-    validation: '1506216528DA',
   },
 ]
 
