@@ -5,6 +5,7 @@ import Tv from './components/Tv.jsx'
 import Desk from './components/Desk.jsx'
 import { Arrow, Spark } from './components/Icons.jsx'
 import TabBar from './components/TabBar.jsx'
+import Gate from './components/Gate.jsx'
 
 const src = (p) => `./${p}`
 
@@ -45,6 +46,14 @@ export default function App() {
   const [menu, setMenu] = useState(false)
   const [zoom, setZoom] = useState(null)
   const tvRef = useRef(null)
+  const [gate, setGate] = useState(() => {
+    try { return sessionStorage.getItem('dana-gate') !== 'passed' } catch { return true }
+  })
+  const passGate = () => {
+    try { sessionStorage.setItem('dana-gate', 'passed') } catch { /* private mode */ }
+    setGate(false)
+    window.scrollTo(0, 0)
+  }
   useReveal()
 
   useEffect(() => {
@@ -218,11 +227,14 @@ export default function App() {
         <footer className="foot">
           <span>© {new Date().getFullYear()} {me.name}</span>
           <span>Designed &amp; built in Bahrain</span>
+          <button className="foot-gate" onClick={() => setGate(true)}>Return to gate</button>
           <a href="#top">Back to top ↑</a>
         </footer>
       </section>
 
       <TabBar />
+
+      {gate && <Gate onDone={passGate} />}
 
       {zoom && (
         <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${zoom.level} certificate`} onClick={() => setZoom(null)}>
