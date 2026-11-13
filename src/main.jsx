@@ -7,6 +7,7 @@ import '@fontsource/jetbrains-mono/400.css'
 import '@fontsource/jetbrains-mono/600.css'
 import '@fontsource/amiri/arabic-400.css'
 import '@fontsource/amiri/arabic-700.css'
+import '@fontsource/aref-ruqaa/arabic-400.css'
 import './styles.css'
 import App from './App.jsx'
 

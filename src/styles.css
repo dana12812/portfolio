@@ -2173,39 +2173,39 @@ html.gate-lock body {
   display: none;
 }
 .cover-ar {
-  font-family: 'Amiri', serif;
-  font-weight: 700;
-  font-size: 40px;
+  font-family: 'Aref Ruqaa', serif;
+  font-weight: 400;
+  font-size: 31px;
   line-height: 1.05;
   color: #e3b84c;
 }
 .cover-name {
   font-family: 'Inter Variable', Inter, sans-serif;
-  font-weight: 800;
-  font-size: 15px;
-  letter-spacing: 0.04em;
-  margin: 2px 0 6px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  margin: 4px 0 6px;
 }
 .emblem {
-  width: 212px;
-  height: 212px;
-  margin: -6px 0 -14px;
+  width: 176px;
+  height: 176px;
+  margin: 14px 0 10px;
   filter: none;
 }
 .cover-ar2 {
-  font-family: 'Amiri', serif;
-  font-weight: 700;
-  font-size: 36px;
+  font-family: 'Aref Ruqaa', serif;
+  font-weight: 400;
+  font-size: 29px;
   line-height: 1.05;
   margin-top: 4px;
   color: #e3b84c;
 }
 .cover-title {
   font-family: 'Inter Variable', Inter, sans-serif;
-  font-weight: 800;
-  font-size: 15px;
-  letter-spacing: 0.06em;
-  margin: 0;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  margin: 4px 0 0;
 }
 .chip {
   width: 30px;
