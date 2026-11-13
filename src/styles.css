@@ -2143,7 +2143,6 @@ html.gate-lock body {
   transform-origin: left center;
   transform-style: preserve-3d;
   transition: transform 1.1s cubic-bezier(0.6, 0, 0.2, 1);
-  cursor: pointer;
 }
 .cover.flipped {
   transform: rotateY(-180deg);
@@ -2162,46 +2161,50 @@ html.gate-lock body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  color: #e3c67a;
+  padding: 26px 18px 22px;
+  color: #e7c76f;
   background:
-    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.12), transparent 55%),
-    repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 0 2px, transparent 2px 4px),
-    linear-gradient(150deg, #7d1a2b, #4a0b16 70%, #3a0811);
-  box-shadow: inset 6px 0 10px -4px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(227, 198, 122, 0.25),
+    radial-gradient(ellipse at 28% 18%, rgba(255, 255, 255, 0.16), transparent 55%),
+    repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.045) 0 2px, transparent 2px 4px),
+    linear-gradient(155deg, #c11d32, #a3142a 55%, #860d1f);
+  box-shadow: inset 6px 0 10px -4px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(231, 199, 111, 0.25),
     0 30px 50px -24px rgba(42, 20, 24, 0.75);
 }
-.cover-front::before {
-  content: '';
-  position: absolute;
-  inset: 12px 12px 12px 18px;
-  border: 1px solid rgba(227, 198, 122, 0.35);
-  border-radius: 4px 12px 12px 4px;
-}
 .cover-ar {
-  font-size: 34px;
-  line-height: 1;
-  color: #e9cc80;
+  font-size: 36px;
+  line-height: 1.1;
+  color: #ecc96f;
+  text-shadow: 0 1px 0 rgba(90, 10, 20, 0.5);
+}
+.cover-name {
+  font-family: var(--sans, Inter, sans-serif);
+  font-weight: 700;
+  font-size: 12.5px;
+  letter-spacing: 0.12em;
+  margin: 2px 0 10px;
 }
 .emblem {
-  width: 118px;
-  height: 118px;
-  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.35));
+  width: 108px;
+  height: 108px;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.3));
+}
+.cover-ar2 {
+  font-size: 32px;
+  line-height: 1.1;
+  margin-top: 12px;
+  color: #ecc96f;
 }
 .cover-title {
-  font-family: var(--serif);
-  font-size: 30px;
-  letter-spacing: 0.32em;
-  margin-right: -0.32em;
+  font-family: var(--sans, Inter, sans-serif);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.14em;
 }
-.cover-sub {
-  font-family: var(--mono);
-  font-size: 8.5px;
-  letter-spacing: 0.2em;
-  opacity: 0.85;
-}
-.closed .cover:hover {
-  transform: rotateY(-8deg);
+.chip {
+  width: 30px;
+  height: 20px;
+  margin-top: 14px;
+  color: #e7c76f;
 }
 .cover-back {
   transform: rotateY(180deg);
@@ -2281,5 +2284,43 @@ html.gate-lock body {
   .book,
   .gate {
     transition: none;
+  }
+}
+
+.gate-progress {
+  position: absolute;
+  left: var(--pad);
+  right: var(--pad);
+  bottom: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(42, 20, 24, 0.1);
+  overflow: hidden;
+}
+.gate-progress i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #7b1e2c, #c9a24a);
+  transform-origin: left;
+  animation: gateBar 7s linear forwards;
+}
+.gate-progress.fast i {
+  animation-duration: 0.9s;
+}
+@keyframes gateBar {
+  from {
+    transform: scaleX(0);
+  }
+}
+.book {
+  cursor: default !important;
+}
+.gate-skip {
+  white-space: nowrap;
+}
+@media (width<=640px) {
+  .gate-tag {
+    display: none;
   }
 }

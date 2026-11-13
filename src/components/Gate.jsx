@@ -60,7 +60,6 @@ export default function Gate({ onDone }) {
   const [drag, setDrag] = useState({ x: 0, y: 0, active: false })
   const [stamped, setStamped] = useState(false)
   const timers = useRef([])
-  const start = useRef(null)
   const date = useRef(today())
   const L = LAYOUTS[layout]
   const reduce = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -98,65 +97,42 @@ export default function Gate({ onDone }) {
     return { x: glassCx - photoCx, y: glassCy - photoCy }
   }, [L])
 
+  const gone = useRef(false)
   const leave = useCallback(() => {
+    if (gone.current) return
+    gone.current = true
     setPhase('leaving')
     later(onDone, reduce ? 50 : 900)
   }, [onDone, reduce])
 
-  const scan = useCallback(() => {
-    setDrag({ ...target(), active: false })
-    setPhase('scanning')
-    later(() => {
-      setPhase('verified')
-      later(() => setStamped(true), 250)
-      later(leave, 2600)
-    }, reduce ? 300 : 2000)
+  const play = useCallback(() => {
+    const T = reduce ? [100, 200, 300, 400, 900] : [900, 2300, 3300, 5200, 7000]
+    later(() => setPhase('open'), T[0])
+    later(() => setDrag({ ...target(), active: false }), T[1])
+    later(() => setPhase('scanning'), T[2])
+    later(() => { setPhase('verified'); later(() => setStamped(true), 250) }, T[3])
+    later(leave, T[4])
   }, [target, leave, reduce])
 
-  const open = () => phase === 'closed' && setPhase('open')
+  useEffect(() => {
+    play()
+    return () => {
+      timers.current.forEach(clearTimeout)
+      timers.current = []
+    }
+  }, [play])
 
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'Escape') leave()
-      if (e.key !== 'Enter') return
-      if (phase === 'closed') setPhase('open')
-      else if (phase === 'open') scan()
-    }
+    const onKey = (e) => (e.key === 'Escape' || e.key === 'Enter') && leave()
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [phase, scan, leave])
-
-  const down = (e) => {
-    if (phase !== 'open') return
-    e.currentTarget.setPointerCapture(e.pointerId)
-    start.current = { px: e.clientX, py: e.clientY, x: drag.x, y: drag.y }
-    setDrag((d) => ({ ...d, active: true }))
-  }
-  const move = (e) => {
-    if (!start.current) return
-    const s = start.current
-    setDrag({ x: s.x + (e.clientX - s.px) / scale, y: s.y + (e.clientY - s.py) / scale, active: true })
-  }
-  const up = () => {
-    if (!start.current) return
-    start.current = null
-    const [bx, by] = L.book
-    const [sx, sy] = L.scanner
-    const px = bx + PAGE_W + drag.x
-    const py = by + drag.y
-    const gx = sx + GLASS[0]
-    const gy = sy + GLASS[1]
-    const ox = Math.max(0, Math.min(px + PAGE_W, gx + GLASS[2]) - Math.max(px, gx))
-    const oy = Math.max(0, Math.min(py + PAGE_H, gy + GLASS[3]) - Math.max(py, gy))
-    if ((ox * oy) / (PAGE_W * PAGE_H) > 0.3) scan()
-    else setDrag({ x: 0, y: 0, active: false })
-  }
+  }, [leave])
 
   const closedShift = phase === 'closed' ? -PAGE_W / 2 : 0
   const lcd = { closed: 'READY', open: 'READY', scanning: 'SCANNING', verified: 'VERIFIED', leaving: 'VERIFIED' }[phase]
   const msg = {
-    closed: ['Open your passport', layout === 'tall' ? 'Tap the cover' : 'Tap the cover · or press Enter'],
-    open: ['Place the photo page on the scanner', layout === 'tall' ? 'Drag the passport onto the glass' : 'Drag the passport onto the glass · or press Enter'],
+    closed: ['Arriving in Bahrain', 'Gate 01 · Manama'],
+    open: ['Presenting passport', 'Photo page to the scanner'],
     scanning: ['Scanning photo page…', 'Please hold still'],
     verified: ['Admitted. Welcome in.', 'أهلاً وسهلاً'],
     leaving: ['Admitted. Welcome in.', 'أهلاً وسهلاً'],
@@ -167,7 +143,7 @@ export default function Gate({ onDone }) {
       <div className="gate-top">
         <span className="logo">{me.first.toLowerCase()}<span>.</span></span>
         <span className="gate-tag">Gate 01 · Manama · بوابة</span>
-        <button className="gate-skip" onClick={leave}>Skip</button>
+        <button className="gate-skip" onClick={leave}>Skip intro</button>
       </div>
 
       <div className="gate-stage-wrap" style={{ width: L.W * scale, height: L.H * scale }}>
@@ -201,10 +177,6 @@ export default function Gate({ onDone }) {
               top: L.book[1],
               transform: `translate(${drag.x + closedShift}px, ${drag.y}px)`,
             }}
-            onPointerDown={down}
-            onPointerMove={move}
-            onPointerUp={up}
-            onPointerCancel={up}
           >
             {/* photo page (right) */}
             <div className="ppage photo">
@@ -247,12 +219,18 @@ export default function Gate({ onDone }) {
             </div>
 
             {/* cover: front is the passport cover, back is the visa page */}
-            <div className={`cover ${phase === 'closed' ? '' : 'flipped'}`} onClick={open}>
+            <div className={`cover ${phase === 'closed' ? '' : 'flipped'}`}>
               <div className="cover-front">
-                <span className="ar cover-ar">جواز سفر</span>
+                <span className="ar cover-ar">دانة الصالح</span>
+                <span className="cover-name">DANA AL SALEH</span>
                 <Emblem />
+                <span className="ar cover-ar2">جواز سفر</span>
                 <span className="cover-title">PASSPORT</span>
-                <span className="cover-sub">{me.name.toUpperCase()} · PORTFOLIO</span>
+                <svg className="chip" viewBox="0 0 40 26" aria-hidden="true">
+                  <rect x="1" y="1" width="38" height="24" rx="5" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <path d="M1 9h12M27 9h12M1 17h12M27 17h12" stroke="currentColor" strokeWidth="2" />
+                  <circle cx="20" cy="13" r="5.5" fill="none" stroke="currentColor" strokeWidth="2" />
+                </svg>
               </div>
               <div className="cover-back ppage visas">
                 <div className="ppage-head"><span>VISAS</span><span className="ar">تأشيرات</span></div>
@@ -267,10 +245,10 @@ export default function Gate({ onDone }) {
         </div>
       </div>
 
+      <div className={`gate-progress ${reduce ? 'fast' : ''}`} aria-hidden="true"><i /></div>
       <div className="gate-msg" aria-live="polite">
         <p className="gate-title">{msg[0]}</p>
         <p className={`gate-hint ${phase === 'verified' || phase === 'leaving' ? 'ar' : ''}`}>{msg[1]}</p>
-        {phase === 'open' && <button className="btn sm" onClick={scan}>Scan it for me</button>}
       </div>
     </div>
   )
