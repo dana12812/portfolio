@@ -58,7 +58,7 @@ export default function TabBar() {
       {EXT.map(([href, label, icon]) => (
         <a key={label} href={href} className="ext" target="_blank" rel="noopener noreferrer" aria-label={`${label} profile (opens in a new tab)`}>
           <svg viewBox="0 0 24 24" aria-hidden="true">{I[icon]}</svg>
-          <span>{label}<b aria-hidden="true">↗</b></span>
+          <span>{label}<svg className="ext-arrow" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9 9 3M4 3h5v5" /></svg></span>
         </a>
       ))}
     </nav>

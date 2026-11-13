@@ -228,7 +228,7 @@ export default function App() {
           <span>© {new Date().getFullYear()} {me.name}</span>
           <span>Designed &amp; built in Bahrain</span>
           <button className="foot-gate" onClick={() => setGate(true)}>Return to gate</button>
-          <a href="#top">Back to top ↑</a>
+          <a href="#top">Back to top <svg className="arrow up" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 10.5V2M2.5 5.5 6 2l3.5 3.5" fill="none" stroke="currentColor" strokeWidth="1.4" /></svg></a>
         </footer>
       </section>
 

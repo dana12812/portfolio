@@ -74,7 +74,7 @@ export default function Tv({ channel, setChannel }) {
             <div className="scan" aria-hidden="true" />
             <div className="osd" aria-hidden="true">
               <span>CH {String(channel + 1).padStart(2, '0')}</span>
-              <span className="rec">● LIVE</span>
+              <span className="rec"><i className="rec-dot" /> LIVE</span>
             </div>
             <div className="screen-glare" aria-hidden="true" />
           </div>

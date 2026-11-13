@@ -16,30 +16,30 @@ const today = () =>
     .toUpperCase()
 
 function Emblem() {
+  // original engraved-style emblem: a pearl in a scallop shell under a date palm, framed by scrolls
+  const g = '#e3b84c'
+  const scroll = 'M0 0 C-14 -6 -26 -2 -30 10 C-33 20 -26 30 -16 28 C-8 26 -8 16 -15 15 C-20 14 -22 20 -18 22'
   return (
-    <svg className="emblem" viewBox="0 0 120 120" aria-hidden="true">
-      <defs>
-        <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#f6e2a6" />
-          <stop offset=".45" stopColor="#c9a24a" />
-          <stop offset=".7" stopColor="#8f6a22" />
-          <stop offset="1" stopColor="#e8c977" />
-        </linearGradient>
-      </defs>
-      <circle cx="60" cy="60" r="56" fill="none" stroke="url(#gold)" strokeWidth="2" />
-      <circle cx="60" cy="60" r="50" fill="none" stroke="url(#gold)" strokeWidth=".8" strokeDasharray="1.5 3" />
+    <svg className="emblem" viewBox="0 0 200 200" fill="none" stroke={g} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {/* date palm */}
+      <path d="M100 74 C99 62 100 50 101 40" strokeWidth="3" />
+      <path d="M101 40 C92 30 80 30 72 36 M101 40 C110 30 122 30 130 36 M101 40 C94 24 84 18 76 18 M101 40 C108 24 118 18 126 18 M101 40 C100 28 101 18 103 10" strokeWidth="2.4" />
+      <path d="M96 44 l-4 3 M106 44 l4 3" strokeWidth="2" />
       {/* scallop shell */}
-      <path d="M60 92 L27 62 Q28 40 44 33 Q52 29 60 29 Q68 29 76 33 Q92 40 93 62 Z" fill="url(#gold)" />
-      <path d="M27 62 Q28 40 44 33 Q52 29 60 29 Q68 29 76 33 Q92 40 93 62" fill="none" stroke="#5a0f1c" strokeOpacity=".35" strokeWidth="1" />
-      {[-4, -3, -2, -1, 0, 1, 2, 3, 4].map((i) => (
-        <path key={i} d={`M60 90 L${60 + i * 7.6} ${33 + Math.abs(i) * Math.abs(i) * 0.9}`} stroke="#5a0f1c" strokeOpacity=".4" strokeWidth="1.1" />
-      ))}
-      <path d="M50 88 h20 l-3 8 h-14 z" fill="url(#gold)" />
+      <path d="M100 150 L58 104 C58 84 76 72 100 72 C124 72 142 84 142 104 Z" strokeWidth="3" />
+      <path d="M100 148 L64 104 M100 148 L74 92 M100 148 L87 80 M100 148 L100 76 M100 148 L113 80 M100 148 L126 92 M100 148 L136 104" strokeWidth="1.6" />
+      <path d="M88 150 h24 l-4 10 h-16 z" strokeWidth="2.4" />
       {/* the pearl */}
-      <circle cx="60" cy="96" r="8.5" fill="#fbf4e2" stroke="url(#gold)" strokeWidth="1.2" />
-      <circle cx="57.5" cy="93.5" r="2.6" fill="#fff" />
-      {/* five-point serration, from the flag */}
-      <path d="M38 14 h44 l-4.4 6 l-4.4 -6 l-4.4 6 l-4.4 -6 l-4.4 6 l-4.4 -6 l-4.4 6 l-4.4 -6 l-4.4 6 z" fill="url(#gold)" />
+      <circle cx="100" cy="170" r="11" strokeWidth="2.6" />
+      <path d="M95 165 a6 6 0 0 1 6 -3" strokeWidth="1.8" />
+      {/* scroll work, both sides */}
+      <g strokeWidth="2.2">
+        <path transform="translate(58 110)" d={scroll} />
+        <path transform="translate(142 110) scale(-1 1)" d={scroll} />
+        <path transform="translate(62 140) rotate(-20)" d={scroll} />
+        <path transform="translate(138 140) rotate(20) scale(-1 1)" d={scroll} />
+      </g>
+      <path d="M40 92 C30 110 32 140 52 158 M160 92 C170 110 168 140 148 158" strokeWidth="1.6" strokeDasharray="1 5" />
     </svg>
   )
 }
@@ -227,9 +227,9 @@ export default function Gate({ onDone }) {
                 <span className="ar cover-ar2">جواز سفر</span>
                 <span className="cover-title">PASSPORT</span>
                 <svg className="chip" viewBox="0 0 40 26" aria-hidden="true">
-                  <rect x="1" y="1" width="38" height="24" rx="5" fill="none" stroke="currentColor" strokeWidth="2" />
-                  <path d="M1 9h12M27 9h12M1 17h12M27 17h12" stroke="currentColor" strokeWidth="2" />
-                  <circle cx="20" cy="13" r="5.5" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <rect x="1.5" y="1.5" width="37" height="23" rx="4" fill="none" stroke="currentColor" strokeWidth="2.4" />
+                  <path d="M1.5 9h12M26.5 9h12M1.5 17h12M26.5 17h12" stroke="currentColor" strokeWidth="2.4" />
+                  <circle cx="20" cy="13" r="5.5" fill="none" stroke="currentColor" strokeWidth="2.4" />
                 </svg>
               </div>
               <div className="cover-back ppage visas">
