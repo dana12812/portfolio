@@ -2324,3 +2324,280 @@ html.gate-lock body {
     display: none;
   }
 }
+
+/* ---------- desk scene: according to my calculations ---------- */
+.dscene-wrap {
+  position: relative;
+  width: 100%;
+}
+.dscene {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+}
+.dscene-title {
+  position: absolute;
+  left: 8px;
+  top: 0;
+  line-height: 1;
+}
+.dscene-title span {
+  display: block;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.dscene-title em {
+  display: block;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 58px;
+  color: var(--accent);
+  margin-top: 4px;
+}
+.dcal {
+  position: absolute;
+  left: 178px;
+  top: 104px;
+  width: 360px;
+  padding: 14px 14px 16px;
+  background: linear-gradient(180deg, #fffdf8, #f5ecdb);
+  border-radius: 10px;
+  transform: rotate(5deg);
+  box-shadow: 0 1px 0 #fff inset, 0 30px 50px -28px rgba(42, 20, 24, 0.55), 0 10px 16px -10px rgba(42, 20, 24, 0.25);
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.8s;
+  opacity: 0;
+  transform: rotate(12deg) translate(30px, -20px);
+}
+.dscene.seen .dcal {
+  opacity: 1;
+  transform: rotate(5deg);
+}
+.dcal-month {
+  font-family: var(--serif);
+  font-size: 26px;
+  padding: 0 4px 8px;
+  color: var(--ink);
+}
+.dcal-month span {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+.dcal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1.5px solid rgba(42, 20, 24, 0.75);
+  border-left: 1.5px solid rgba(42, 20, 24, 0.75);
+}
+.dcell {
+  position: relative;
+  height: 78px;
+  border-right: 1.5px solid rgba(42, 20, 24, 0.75);
+  border-bottom: 1.5px solid rgba(42, 20, 24, 0.75);
+}
+.dnum {
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink);
+}
+.dcell.hot {
+  background: linear-gradient(160deg, #8f2433, #6c1621);
+  box-shadow: 0 0 0 6px rgba(123, 30, 44, 0.16);
+  z-index: 1;
+}
+.dscene.seen .dcell.hot {
+  animation: hotPulse 3s ease-in-out 1.2s infinite;
+}
+@keyframes hotPulse {
+  50% {
+    box-shadow: 0 0 0 9px rgba(123, 30, 44, 0.1);
+  }
+}
+.dcell.hot .dnum {
+  color: #f5efe3;
+  font-size: 15px;
+}
+.save {
+  position: absolute;
+  inset: 20px 4px 4px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 0.95;
+  color: #f5efe3;
+}
+.save svg {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  color: #f3d98b;
+}
+.save .s1 {
+  left: 6px;
+  top: -8px;
+}
+.save .s2 {
+  right: 8px;
+  bottom: 2px;
+}
+.dcalc {
+  position: absolute;
+  left: 30px;
+  top: 178px;
+  width: 300px;
+  padding: 20px 20px 22px;
+  border-radius: 34px;
+  background: linear-gradient(170deg, #9b2a3a 0%, #7b1e2c 40%, #5e1320 100%);
+  box-shadow: inset 0 2px 1px rgba(255, 255, 255, 0.35), inset 0 -10px 18px rgba(0, 0, 0, 0.35), 0 5px 0 #3e0b14,
+    0 40px 60px -26px rgba(42, 20, 24, 0.8);
+  transform: rotate(-8deg) translateY(40px);
+  opacity: 0;
+  transition: transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s, opacity 0.8s 0.15s;
+  z-index: 2;
+}
+.dscene.seen .dcalc {
+  opacity: 1;
+  transform: rotate(-8deg);
+}
+.dcalc::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 30px;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.16), transparent 32%);
+  pointer-events: none;
+}
+.dcalc-screen {
+  position: relative;
+  height: 104px;
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 0.02em;
+  color: #efe6be;
+  text-shadow: 0 0 8px rgba(239, 230, 190, 0.45);
+  background: linear-gradient(180deg, #55584d, #3d3f37 70%, #35362f);
+  box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.7), 0 0 0 4px #4a0e16, 0 0 0 5px rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.dcalc-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.14) 0 34%, transparent 34.5%),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.08) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+}
+.dcalc-screen span {
+  min-height: 1.1em;
+}
+.caret {
+  display: inline-block;
+  width: 9px;
+  height: 18px;
+  margin-left: 3px;
+  vertical-align: -3px;
+  background: #efe6be;
+  animation: caret 1s steps(2) infinite;
+}
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+.dcalc-brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 14px 4px 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(245, 239, 227, 0.6);
+}
+.dcalc-brand .solar {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 4px;
+  background: #2a1418;
+}
+.dcalc-brand .solar i {
+  width: 14px;
+  height: 10px;
+  background: linear-gradient(180deg, #4b3a3d, #2d2225);
+}
+.dkeys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.dkey {
+  height: 46px;
+  border-radius: 14px;
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: #f6e4e4;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+  background: linear-gradient(180deg, #b0404f 0%, #902a37 45%, #761e2a 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -2px 3px rgba(0, 0, 0, 0.25), 0 4px 0 #3d0a12,
+    0 7px 9px -2px rgba(0, 0, 0, 0.5);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.dkey.op {
+  background: linear-gradient(180deg, #6e1622 0%, #55101a 60%, #470c15 100%);
+}
+.dkey.eq {
+  grid-row: span 2;
+  height: auto;
+}
+.dkey.zero {
+  grid-column: span 2;
+}
+.dkey:hover {
+  transform: translateY(1px);
+}
+.dkey.down,
+.dkey:active {
+  transform: translateY(4px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.25), 0 0 0 #3d0a12,
+    0 2px 4px -1px rgba(0, 0, 0, 0.5);
+}
+.dhint {
+  position: absolute;
+  right: 16px;
+  bottom: 6px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--muted);
+}
+.dhint::before {
+  content: '↙ ';
+  font-style: normal;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dcal,
+  .dcalc {
+    transition: none;
+  }
+}
